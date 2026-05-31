@@ -17,5 +17,9 @@
     "url": "https://github.com/aaronvalera/to-do-app/issues"
   },
   "homepage": "https://github.com/aaronvalera/to-do-app#readme",
-  "description": "Full-stack project to put in practice our knowledge. This is a Todo-app with the goal to help users to make the most of their day."
+  "description": "Full-stack project to put in practice our knowledge. This is a Todo-app with the goal to help users to make the most of their day.",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "tailwindcss": "^4.3.0"
+  }
 }
