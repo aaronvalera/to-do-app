@@ -20,6 +20,8 @@
   "description": "Full-stack project to put in practice our knowledge. This is a Todo-app with the goal to help users to make the most of their day.",
   "dependencies": {
     "@tailwindcss/cli": "^4.3.0",
+    "express": "^5.2.1",
+    "mongoose": "^9.6.3",
     "tailwindcss": "^4.3.0"
   }
 }
