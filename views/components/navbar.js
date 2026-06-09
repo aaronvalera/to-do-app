@@ -11,12 +11,12 @@ const createNavBarHome = () => {
         </svg>
         <div id="mobile-menu" class="hidden absolute flex-col justify-center items-center w-48 gap-4 top-16 right-4 py-5 rounded-xl bg-gray-100 shadow-md md:hidden z-1">
             <a href="/login/" class="py-2 px-4 w-24 rounded-3xl font-bold text-center hover:bg-gray-200 transition ease-in-out duration-300">Log In</a>
-            <a href="/signup/" class="py-2 px-4 w-24 rounded-3xl font-bold text-center bg-amber-500 hover:bg-amber-600 transition ease-in-out duration-300">Sign Up</a>
+            <a href="/signup/" class="py-2 px-4 w-24 rounded-3xl font-bold text-center bg-blue-500 hover:bg-blue-600 transition ease-in-out duration-300">Sign Up</a>
         </div>
         <!-- Desktop -->
-        <div class="hidden md:flex flex-row px-2.5 gap-4 text-slate-600">
-        <a href="/login/" class="py-2 px-4 rounded-3xl font-bold hover:bg-gray-200 transition ease-in-out duration-300">Log In</a>
-        <a href="/signup/" class="py-2 px-4 rounded-3xl font-bold bg-amber-500 hover:bg-amber-600 transition ease-in-out duration-300">Sign Up</a>
+        <div class="hidden md:flex flex-row px-2.5 gap-4 text-white">
+        <a href="/login/" class="py-2 px-4 rounded-3xl font-bold bg-blue-300 hover:bg-blue-400 transition ease-in-out duration-300">Log In</a>
+        <a href="/signup/" class="py-2 px-4 rounded-3xl font-bold bg-blue-700 hover:bg-blue-800 transition ease-in-out duration-300">Sign Up</a>
         </div>
     </div>
 `;
