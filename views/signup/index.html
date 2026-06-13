@@ -1,51 +1,49 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Sign Up</title>
-    <link rel="stylesheet" href="../../src/output.css" />
+    <link rel="stylesheet" href="../../src/output.css"/>
 </head>
 
 <body class="bg-zinc-50 h-screen">
     <nav id="navbar"></nav>
     <div id="notification" class="fixed top-20 right-0 left-0"></div>   
-    <div class="flex pt-16 h-full max-w-7xl mx-auto justify-center items-center px-4">
-        <form id="form" class="flex pt-16 flex-col gap-4 bg-zinc-200 p-4 rounded-lg text-lg shadow-lg lg:w-2/4">
+    <div class="flex flex-col md:flex-row pt-5 max-w-7xl mx-auto justify-center md:justify-evenly items-center px-4 overflow-hidden">
+        <div class="flex flex-col gap-2 my-8 md:my-0 max-w-sm pr-8 text-center md:text-start">
+            <h1 class="text-2xl md:text-5xl font-extrabold tracking-tight text-blue-700 mb-2">Start today</h1>
+            <p class="text-md md:text-lg text-zinc-700 font-normal leading-relaxed">Clear your mind. We'll remember the rest. <br> Organize your daily tasks effortlessly.</p>
+        </div>
+        <form id="form" class="flex p-3 flex-col gap-2 bg-gray-300/20 rounded-lg text-lg shadow-xl max-w-md lg:w-2/4 outline-gray-700 border border-gray-300">
             <div class="flex flex-col gap-2">
-                <label class="font-bold" for="name-input">Name <span class="text-red-500">*</span></label>
-                <input id="name-input" type="text" name="name-input" autocomplete="off" placeholder="Enter your name" class="rounded-lg p-2 bg-zinc-100 focus:outline-blue-500"/>
-                <p class="text-sm etxt-zinc-800">
-                    Name must contain at least 4 letters
+                <label class="font-medium" for="username-input">Username <span class="text-red-500">*</span></label>
+                <input id="username-input" type="text" name="username-input" autocomplete="off" placeholder="Enter your username" class="rounded-lg p-2 bg-zinc-50 border"/>
+                <p class="text-xs etxt-zinc-800">
+                    Name must contain at least 3 characters
                 </p>
             </div>
             <div class="flex flex-col gap-2">
-                <label class="font-bold" for="email-input">Email <span class="text-red-500">*</span></label>
-                <input id="email-input" type="text" name="email-input" autocomplete="off" placeholder="example@gmail.com" class="rounded-lg p-2 bg-zinc-100 focus:outline-blue-500"/>
-                <p class="text-sm etxt-zinc-800">Valid email is required</p>
+                <label class="font-medium" for="email-input">Email <span class="text-red-500">*</span></label>
+                <input id="email-input" type="text" name="email-input" autocomplete="off" placeholder="example@gmail.com" class="rounded-lg p-2 bg-zinc-50 border"/>
+                <p class="text-xs etxt-zinc-800">Valid email is required</p>
             </div>
             <div class="flex flex-col gap-2">
-                <label class="font-bold" for="password-input">Password <span class="text-red-500">*</span></label>
-                <input id="password-input" type="password" name="password-input" autocomplete="off" placeholder="Enter your password" class="rounded-lg p-2 bg-zinc-100 focus:outline-blue-500"/>
-                <p class="text-sm etxt-zinc-800">
-                    Must contain at least one letter<br/>
-                    Must contain at least one number<br/>
-                    Must be at least 8 characters long
-                </p>
+                <label class="font-medium" for="password-input">Password <span class="text-red-500">*</span></label>
+                <input id="password-input" type="password" name="password-input" autocomplete="off" placeholder="Enter your password" class="rounded-lg p-2 bg-zinc-50 border"/>
+                <p class="text-xs etxt-zinc-800">Min 8 characters, 1 capital, 1 number, 1 symbol (!@#$%^&*)</p>
             </div>
             <div class="flex flex-col gap-2">
-                <label class="font-bold" for="password-input">Confirm password<span class="text-red-500">*</span></label>
-                <input id="match-input" type="password" name="match-input" autocomplete="off" placeholder="Enter same password" class="rounded-lg p-2 bg-zinc-100 focus:outline-blue-500"/>
-                <p class="text-sm etxt-zinc-800">Passwords must match</p>
+                <label class="font-medium" for="password-input">Confirm password <span class="text-red-500">*</span></label>
+                <input id="match-password" type="password" name="match-input" autocomplete="off" placeholder="Enter same password" class="rounded-lg p-2 bg-zinc-50 border"/>
+                <p class="text-xs etxt-zinc-800">Passwords must match</p>
             </div>
-            <button id="form-btn" class="bg-blue-700 py-2 px-4 rounded-lg font-bold text-white hover:bg-blue-800 text-center transition ease-in-out disabled:opacity-40 disabled:cursor-not-allowed" disabled>
+            <button id="form-btn" class="bg-blue-400 py-2 rounded-lg px-4rounded-lg font-bold text-white hover:bg-blue-500 text-center transition ease-in-out disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer border border-blue-600" disabled>
                 Sign up
             </button>
         </form>
     </div>
-    <script src="/views/components/navbar.js"></script>
     <script src="./index.js"></script>
+    <script src="/views/components/navbar.js"></script>
 </body>
-
 </html>
