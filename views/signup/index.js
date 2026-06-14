@@ -1,5 +1,5 @@
 // REGEX
-const USERNAME_REGEX = /^[a-zA-Z][a-zA-Z0-9]{2,19}$/;
+const USERNAME_REGEX = /^[a-zA-Z][a-zA-Z0-9]{4,19}$/;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-+]).{8,19}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
