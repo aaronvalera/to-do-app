@@ -7,41 +7,43 @@
     <link rel="stylesheet" href="/src/output.css"/>
 </head>
 
-<body class="bg-zinc-50 h-screen">
-    <nav id="navbar" class="fixed top-0 right-0 left-0 h-16 px-4 border border-gray-300 shadow-md"></nav>
-    <div class="flex flex-col md:flex-row pt-5 max-w-7xl mx-auto justify-center md:justify-evenly items-center px-4 overflow-hidden">
-        <div class="flex flex-col gap-2 my-8 md:my-0 max-w-sm pr-8 text-center md:text-start">
-            <h1 class="text-2xl md:text-5xl font-extrabold tracking-tight text-blue-700 mb-2">Start today</h1>
-            <p class="text-md md:text-lg text-zinc-700 font-normal leading-relaxed">Clear your mind. We'll remember the rest. <br> Organize your daily tasks effortlessly.</p>
+<body class="bg-zinc-50 min-h-screen flex flex-col">
+    <nav id="navbar" class="fixed top-0 right-0 left-0 h-16 px-4 border border-gray-300 bg-white shadow-md"></nav>
+    <main class="flex-1 flex items-center pt-12 md:pt-16 h-screen w-full">
+        <div class="flex flex-col md:flex-row max-w-7xl my-auto w-full mx-auto justify-center md:justify-evenly items-center px-4 py-6 md:py-0">
+            <div class="flex flex-col gap-2 my-8 md:my-0 max-w-sm pr-8 text-center md:text-start">
+                <h1 class="text-2xl md:text-5xl font-extrabold tracking-tight text-blue-700 mb-2">Start today</h1>
+                <p class="text-md md:text-lg text-zinc-700 font-normal leading-relaxed">Clear your mind. We'll remember the rest. <br> Organize your daily tasks effortlessly.</p>
+            </div>
+            <form id="form" class="flex p-3 flex-col gap-2 bg-gray-300/20 rounded-lg text-lg shadow-xl max-w-md lg:w-2/4 outline-gray-700 border border-gray-300">
+                <div class="flex flex-col gap-2">
+                    <label class="font-medium" for="username-input">Username <span class="text-red-500">*</span></label>
+                    <input id="username-input" type="text" name="username-input" autocomplete="off" placeholder="Enter your username" class="rounded-lg p-2 bg-zinc-50 border"/>
+                    <p class="text-xs text-zinc-800">
+                        Username must contain at least 5 characters
+                    </p>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="font-medium" for="email-input">Email <span class="text-red-500">*</span></label>
+                    <input id="email-input" type="text" name="email-input" autocomplete="off" placeholder="example@gmail.com" class="rounded-lg p-2 bg-zinc-50 border"/>
+                    <p class="text-xs text-zinc-800">Valid email is required</p>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="font-medium" for="password-input">Password <span class="text-red-500">*</span></label>
+                    <input id="password-input" type="password" name="password-input" autocomplete="off" placeholder="Enter your password" class="rounded-lg p-2 bg-zinc-50 border"/>
+                    <p class="text-xs text-zinc-800">Min. 8 characters, 1 capital, 1 number, 1 symbol (!@#$%^&*)</p>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="font-medium" for="password-input">Confirm password <span class="text-red-500">*</span></label>
+                    <input id="match-password" type="password" name="match-input" autocomplete="off" placeholder="Enter same password" class="rounded-lg p-2 bg-zinc-50 border"/>
+                    <p class="text-xs text-zinc-800">Passwords must match</p>
+                </div>
+                <button id="form-btn" class="bg-blue-400 py-2 rounded-lg px-4 font-bold text-white hover:bg-blue-500 text-center transition ease-in-out disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer border border-blue-600" disabled>
+                    Sign up
+                </button>
+            </form>
         </div>
-        <form id="form" class="flex p-3 flex-col gap-2 bg-gray-300/20 rounded-lg text-lg shadow-xl max-w-md lg:w-2/4 outline-gray-700 border border-gray-300">
-            <div class="flex flex-col gap-2">
-                <label class="font-medium" for="username-input">Username <span class="text-red-500">*</span></label>
-                <input id="username-input" type="text" name="username-input" autocomplete="off" placeholder="Enter your username" class="rounded-lg p-2 bg-zinc-50 border"/>
-                <p class="text-xs etxt-zinc-800">
-                    Username must contain at least 5 characters
-                </p>
-            </div>
-            <div class="flex flex-col gap-2">
-                <label class="font-medium" for="email-input">Email <span class="text-red-500">*</span></label>
-                <input id="email-input" type="text" name="email-input" autocomplete="off" placeholder="example@gmail.com" class="rounded-lg p-2 bg-zinc-50 border"/>
-                <p class="text-xs etxt-zinc-800">Valid email is required</p>
-            </div>
-            <div class="flex flex-col gap-2">
-                <label class="font-medium" for="password-input">Password <span class="text-red-500">*</span></label>
-                <input id="password-input" type="password" name="password-input" autocomplete="off" placeholder="Enter your password" class="rounded-lg p-2 bg-zinc-50 border"/>
-                <p class="text-xs etxt-zinc-800">Min. 8 characters, 1 capital, 1 number, 1 symbol (!@#$%^&*)</p>
-            </div>
-            <div class="flex flex-col gap-2">
-                <label class="font-medium" for="password-input">Confirm password <span class="text-red-500">*</span></label>
-                <input id="match-password" type="password" name="match-input" autocomplete="off" placeholder="Enter same password" class="rounded-lg p-2 bg-zinc-50 border"/>
-                <p class="text-xs etxt-zinc-800">Passwords must match</p>
-            </div>
-            <button id="form-btn" class="bg-blue-400 py-2 rounded-lg px-4rounded-lg font-bold text-white hover:bg-blue-500 text-center transition ease-in-out disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer border border-blue-600" disabled>
-                Sign up
-            </button>
-        </form>
-    </div>
+    </main>
     <script src="index.js"></script>
     <script src="/components/navbar.js"></script>
 </body>
