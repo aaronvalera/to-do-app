@@ -5,20 +5,20 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../src/output.css">
+  <link rel="stylesheet" href="/src/output.css">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <title>Login</title>
 </head>
 
 <body class="bg-zinc-50">
   <!-- contenedor donde el archivo js de aaron va a meter el navbar -->
-  <div id="navbar"></div>
+  <nav id="navbar" class="fixed top-0 right-0 left-0 h-16 px-4 border border-gray-300 shadow-md"></nav>
 
   <!-- contenedor principal que centra todo en la pantalla -->
   <div class="pt-16 h-screen flex max-w-7xl mx-auto justify-center items-center">
     <!-- contenedor de la imagen izquierda solo para pantallas grandes -->
     <div class="hidden lg:flex w-2/4 justify-center items-center">
-      <img class="w-3/4" src="../../multimedia/icon-icons (1).png" alt="Login image" />
+      <img class="w-3/4" src="/images/login-icon.png" alt="login-icon"/>
     </div>
 
     <!-- formulario de login -->
@@ -50,8 +50,8 @@
   </div>
 
   <!-- script para cargar la barra de navegacion automatica de aaron -->
-  <script src="/views/components/navbar.js"></script>
   <script src="index.js"></script>
+  <script src="/components/navbar.js"></script>
 </body>
 
 </html>
