@@ -1,5 +1,3 @@
-
-
 const emailInput = document.querySelector('#email');
 const passwordInput = document.querySelector('#password');
 const form = document.querySelector('#form');

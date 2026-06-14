@@ -89,10 +89,8 @@ passwordInput.addEventListener("input", event => {
     passwordValidation = PASSWORD_REGEX.test(event.target.value);
     inputsValidation(passwordValidation, passwordInput);
     validatePasswords();
-    console.log(passwordInput.value)
 });
 
 passwordMatchInput.addEventListener("input", event => {
     validatePasswords();
-    console.log(passwordMatchInput.value)
 });
