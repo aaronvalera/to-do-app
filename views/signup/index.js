@@ -31,29 +31,31 @@ const checkFormStatus = () => {
 };
 
 const unvalidInput = (inputSelector) => {
-    inputSelector.classList.remove("outline-blue-400");
-    inputSelector.classList.remove("bg-sky-100");
-    inputSelector.classList.remove("bg-zinc-50");
-    inputSelector.classList.add("outline-red-400");
-    inputSelector.classList.add("bg-red-50");
-
+    inputSelector.classList.remove(
+        "outline-blue-400",
+        "bg-sky-100",
+        "bg-zinc-50"
+    );
+    inputSelector.classList.add("outline-red-400", "bg-red-50");
 };
 
 const validInput = (inputSelector) => {
-    inputSelector.classList.remove("outline-red-400");
-    inputSelector.classList.remove("bg-red-50");
-    inputSelector.classList.remove("bg-zinc-50");
-    inputSelector.classList.add("outline-blue-400");
-    inputSelector.classList.add("bg-sky-100");
+    inputSelector.classList.remove(
+        "outline-red-400",
+        "bg-red-50",
+        "bg-zinc-50"
+    );
+    inputSelector.classList.add("outline-blue-400", "bg-sky-100");
 };
 
 const clearInput = (inputSelector) => {
-    inputSelector.classList.remove("outline-blue-400");
-    inputSelector.classList.remove("bg-sky-100");
-    inputSelector.classList.remove("outline-red-400");
-    inputSelector.classList.remove("bg-red-50");
+    inputSelector.classList.remove(
+        "outline-blue-400",
+        "bg-sky-100",
+        "outline-red-400",
+        "bg-red-50"
+    );
     inputSelector.classList.add("bg-zinc-50");
-
 };
 
 const inputsValidation = (validator, inputSelector) => {
