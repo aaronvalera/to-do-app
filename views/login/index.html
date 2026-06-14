@@ -5,20 +5,20 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/src/output.css">
+  <link rel="stylesheet" href="../../src/output.css">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <title>Login</title>
 </head>
 
-<body class="bg-zinc-50">
+<body class="bg-zinc-50 min-h-screen flex flex-col">
   <!-- contenedor donde el archivo js de aaron va a meter el navbar -->
-  <nav id="navbar" class="fixed top-0 right-0 left-0 h-16 px-4 border border-gray-300 shadow-md"></nav>
+  <div id="navbar" class="fixed top-0 right-0 left-0 h-16 px-4 border border-gray-300 bg-white shadow-md"></div>
 
   <!-- contenedor principal que centra todo en la pantalla -->
-  <div class="pt-16 h-screen flex max-w-7xl mx-auto justify-center items-center">
-    <!-- contenedor de la imagen izquierda solo para pantallas grandes -->
-    <div class="hidden lg:flex w-2/4 justify-center items-center">
-      <img class="w-3/4" src="/images/login-icon.png" alt="login-icon"/>
+  <div class="pt-16 pb-10 px-4 sm:px-8 min-h-screen flex flex-col md:flex-row max-w-7xl mx-auto justify-center items-center gap-10">
+  <!-- contenedor de la imagen izquierda solo para pantallas grandes -->
+    <div class=" hidden md:flex max-w-xs w-3/4 justify-center items-center">
+      <img class="w-full" src="/images/login-icon.png" alt="login-icon"/>
     </div>
 
     <!-- formulario de login -->
@@ -30,7 +30,7 @@
         <label class="text-sm font-semibold text-zinc-600">Email Address</label>
         <input type="email" id="email" required
           class="border border-zinc-300 p-2 rounded-lg focus:outline-none focus:border-indigo-500"
-          placeholder="your@email.com" />
+          placeholder="your@email.com"/>
       </div>
 
       <!-- contenedor del input de contraseña -->
@@ -38,7 +38,7 @@
         <label class="text-sm font-semibold text-zinc-600">Password</label>
         <input type="password" id="password" required
           class="border border-zinc-300 p-2 rounded-lg focus:outline-none focus:border-indigo-500"
-          placeholder="••••••••" />
+          placeholder="••••••••"/>
       </div>
 
       <!-- boton para iniciar sesion -->
