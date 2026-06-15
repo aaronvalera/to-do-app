@@ -1,3 +1,5 @@
+import {displayNotification} from '/components/notification.js';
+
 // REGEX
 const USERNAME_REGEX = /^[a-zA-Z][a-zA-Z0-9]{4,19}$/;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-+]).{8,19}$/;
@@ -10,6 +12,7 @@ const emailInput = document.getElementById("email-input");
 const passwordInput = document.getElementById("password-input");
 const passwordMatchInput = document.getElementById("match-password");
 const submitFormBtn = document.getElementById("form-btn");
+const notification = document.getElementById("notification");
 
 // VARIABLES
 let usernameValidation = false;
@@ -95,4 +98,25 @@ passwordInput.addEventListener("input", event => {
 
 passwordMatchInput.addEventListener("input", event => {
     validatePasswords();
+});
+
+form.addEventListener("submit", async event => {
+    event.preventDefault();
+    try {
+        const newUser = {
+        username: usernameInput.value,
+        email: emailInput.value,
+        password: passwordInput.value,
+    }
+    const response = await axios.post("/api/users", newUser);
+    console.log(response)
+    } catch (error) {
+        setTimeout(() => {
+            notification.innerHTML = "";
+            notification.classList.remove("opacity-100", "translate-x-0");
+            notification.classList.add("opacity-0", "translate-x-5", "pointer-events-none");
+        }, 4000);
+        displayNotification(true, error.response.data.error);
+        console.log(error.response.data.error);
+    }
 });
