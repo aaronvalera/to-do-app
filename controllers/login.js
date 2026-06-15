@@ -24,17 +24,15 @@ if (!itsCorrect) {
 const userForToken = {
     id: userExist.id,
 };
-const token = jwt.sign(userForToken, process.env.ACCSESS_TOKEN_SECRET, 
-  { expiresIn: "1d" 
+const token = jwt.sign(userForToken, process.env.ACCSESS_TOKEN_SECRET, { 
+    expiresIn: "1d" 
+});
 
-  });
-  // console.log(token); 
-
-  response.cookie("accessToken", accessToken, {
-    expires: "1d", 
-    secure: process.env.NODE_ENV === "production", //SI ESTAMOS EN PRODUCCIÓN, LA COOKIE SOLO SE ENVIARÁ A TRAVÉS DE CONEXIONES SEGURAS (HTTPS)
-    httpOnly: true, //NO SE PUEDE ACCEDER A LA COOKIE DESDE EL LADO DEL CLIENTE, SOLO SE PUEDE ENVIAR EN LAS PETICIONES AL SERVIDOR
-  });
+response.cookie("accessToken", token, {
+    expiresiN: "1d", 
+    secure: process.env.NODE_ENV === "production",
+    httpOnly: true,
+});
 
   return response.sendStatus(200);
 
