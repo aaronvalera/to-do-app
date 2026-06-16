@@ -28,7 +28,7 @@ export const displayNotification = (isError, message) => {
         <div class="flex justify-center flex-col items-center gap-4 bg-slate-200 max-w-xs w-60 py-12 px-4 mx-8 font-extrabold rounded-lg text-white border border-gray-400 shadow-lg text-center">
             ${notificationIcon}
             <h1 class="font-extrabold text-blue-400">Success!</h1>
-            <p class="">${message}</p>
+            <p class="font-bold text-blue-400">${message}</p>
         </div>
     `;
     }
