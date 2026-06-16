@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "cross-env NODE_ENV=production nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -20,10 +20,19 @@
   "description": "Full-stack project to put in practice our knowledge. This is a Todo-app with the goal to help users to make the most of their day.",
   "dependencies": {
     "@tailwindcss/cli": "^4.3.0",
+    "axios": "^1.18.0",
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.3.0",
     "mongoose": "^9.6.3",
+    "morgan": "^1.11.0",
     "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
   }
 }
