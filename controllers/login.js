@@ -33,7 +33,7 @@ loginRouter.post("/", async (req, res) => {
       id: userExist.id, //guardamos el ID único porque es el dato que usará el servidorpara identificar quién es este usuario.
     };
 
-    const token = jwt.sign(userForToken, process.env.ACCSESS_TOKEN_SECRET, {
+    const token = jwt.sign(userForToken, process.env.ACCESS_TOKEN_SECRET, {
       // jwt.sign junta los datos del usuario con nuestra clave secreta para generar el token firmado.
       expiresIn: "1d", //definimos cuando expira el token
     });
