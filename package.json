@@ -33,10 +33,7 @@
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "nodemon": "^3.1.14"
-=======
     "cross-env": "^10.1.0"
->>>>>>> 65e5ac0b23f47634d476ccb151ff3642a9bd3d6e
   }
 }
