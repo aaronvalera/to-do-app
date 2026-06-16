@@ -25,7 +25,7 @@ const checkFormStatus = () => {
     const isFormValid = usernameValidation &&
                         passwordValidation &&
                         emailValidation &&
-                        passwordMatchValidation;``
+                        passwordMatchValidation;
     submitFormBtn.disabled = !isFormValid;
     if(isFormValid) {
         submitFormBtn.classList.add("bg-blue-500");
@@ -107,16 +107,26 @@ form.addEventListener("submit", async event => {
         username: usernameInput.value,
         email: emailInput.value,
         password: passwordInput.value,
-    }
-    const response = await axios.post("/api/users", newUser);
-    console.log(response)
-    } catch (error) {
-        setTimeout(() => {
+        }
+    const { data } = await axios.post("/api/users", newUser);
+    displayNotification(false, data);
+    setTimeout(() => {
             notification.innerHTML = "";
             notification.classList.remove("opacity-100", "translate-x-0");
             notification.classList.add("opacity-0", "translate-x-5", "pointer-events-none");
         }, 4000);
-        displayNotification(true, error.response.data.error);
-        console.log(error.response.data.error);
+        usernameInput.value = "";
+        emailInput.value = "";
+        passwordInput.value = "";
+        passwordMatchInput.value = "";
+        [usernameInput, emailInput, passwordInput, passwordMatchInput].forEach(clearInput);
+        } catch (error) {
+            displayNotification(true, error.response.data.error);
+            setTimeout(() => {
+                notification.innerHTML = "";
+                notification.classList.remove("opacity-100", "translate-x-0");
+                notification.classList.add("opacity-0", "translate-x-5", "pointer-events-none");
+            }, 4000);
+            const errorMessage = error.response?.data?.error || "Internal server error. Please try again later.";
     }
 });
