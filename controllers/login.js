@@ -1,42 +1,55 @@
-const { response, request } = require("express");
-const loginRouter = require("express").Router;
-const bcrypt = require("bcrypt"); //bcrypt es una biblioteca de JavaScript que se utiliza para cifrar contraseñas de forma segura. Proporciona una función de hash que toma una contraseña y un número de salt rounds (que determina la complejidad del hash) y devuelve un hash seguro de la contraseña. Además, bcrypt también proporciona una función de comparación que permite verificar si una contraseña ingresada coincide con el hash almacenado en la base de datos. Esto es útil para autenticar a los usuarios sin almacenar sus contraseñas en texto plano, lo que mejora la seguridad de la aplicación.
-const jwt = require("jsonwebtoken"); //JWT (JSON Web Token) es un estándar abierto que se utiliza para transmitir información de forma segura entre dos partes, generalmente un cliente y un servidor. En el contexto de la autenticación, JWT se utiliza para generar tokens de acceso que contienen información sobre el usuario autenticado. Estos tokens se pueden enviar al cliente después de que el usuario haya iniciado sesión correctamente, y luego el cliente puede incluir este token en las solicitudes posteriores para acceder a recursos protegidos en el servidor. El servidor puede verificar la validez del token y autorizar o denegar el acceso según corresponda.
-//const user = require() PENDIENTE IMPORTAR DE MODELS
+const loginRouter = require("express").Router(); //importa y ejecuta el método Router de Express para crear un módulo de rutas aislado para el login.
+const bcrypt = require("bcrypt"); //importa la librería Bcrypt para realizar la comparación segura de contraseñas mediante hashing.
+const jwt = require("jsonwebtoken"); //importa la librería JsonWebToken para generar tokens de acceso firmados digitalmente.
+// const user = require("..."); // (Pendiente) Importará el modelo de datos de Mongoose para interactuar con la colección de usuarios en MongoDB.
 
-loginRouter.post("./ ", async (req, res) => {
-  const { email, password } = request.body;
-  // console.log(email, password);
-  const userExist = await user.findOne({ email });
-  //   console.log(userExist);
-  if (!userExist) {
-    return response.status(400).json({ error: "Usuario no encontrado" });
+loginRouter.post("/", async (req, res) => {
+  //se define una ruta HTTP POST en la raíz del módulo. Usa 'async' porque adentro ejecutará tareas asíncronas (promesas).
+  const { email, password } = req.body; //desestructura el cuerpo de la petición (req.body) para extraer directamente el correo y la contraseña enviados por el cliente.
+
+  try {
+    // intentamos ejecutar el flujo normal del login. si alguna línea aquí adentro falla, el código no rompe el servidor, sino que salta directo al catch
+    const userExist = await user.findOne({ email }); // busca de forma asíncrona en la base de datos un único usuario que coincida con el email recibido.
+
+    if (!userExist) {
+      // si la base de datos no devolvió ningún registro (userExist es null), significa que el correo no está registrado.
+      return res.status(400).json({ error: "Usuario no encontrado" }); //estado 400 (Bad Request)
+    }
+
+    if (!userExist.verified) {
+      // si la propiedad 'verified' del usuario es falsa (el usuario no ha verificado su cuenta).
+      return res.status(400).json({ error: "email no verificado" });
+    }
+
+    const itsCorrect = await bcrypt.compare(password, userExist.password); // compara asíncronamente la contraseña en texto plano con el hash guardado en la base de datos.
+
+    if (!itsCorrect) {
+      // si las passwords no coinciden
+      return res.status(400).json({ error: "Contraseña incorrecta" });
+    }
+
+    const userForToken = {
+      // crea el objeto con los datos del usuario (en este caso el ID) que queremos meter dentro del token.
+      id: userExist.id, //guardamos el ID único porque es el dato que usará el servidorpara identificar quién es este usuario.
+    };
+
+    const token = jwt.sign(userForToken, process.env.ACCESS_TOKEN_SECRET, {
+      // jwt.sign junta los datos del usuario con nuestra clave secreta para generar el token firmado.
+      expiresIn: "1d", //definimos cuando expira el token
+    });
+
+    res.cookie("accessToken", token, {
+      // guarda el token generado dentro de una cookie en el navegador del cliente.
+      maxAge: 24 * 60 * 60 * 1000, // define la duración de la cookie (1 día).
+      secure: process.env.NODE_ENV === "production", // si está en producción, la cookie solo se transmite mediante conexiones seguras HTTPS.
+      httpOnly: true, // pprotege la cookie prohibiendo que sea accesible mediante scripts de JavaScript en el frontend (evita ataques XSS).
+    });
+
+    return res.sendStatus(200); // responde exitosamente con un estado 200, notificando al frontend que el login fue correcto.
+  } catch (error) {
+    // captura cualquier fallo inesperado del servidor o de la base de datos.
+    return res.status(500).json({ error: "Error interno del servidor" }); // Responde con un estado 500 para no romper la aplicación.
   }
-  if (userExist.verified)
-    return response.status(400).json({ error: "email no verificado" });
-
-  const saltRounds = 10; //salt rounds es el número de veces que se aplica el algoritmo de hash para proteger la contraseña. Cuanto mayor sea el número, más seguro será el hash, pero también llevará más tiempo generar el hash. En general, se recomienda usar al menos 10 salt rounds para una buena seguridad.
-  const itsCorrect = await bcrypt.compare(password, userExist.password);
-//   console.log(itsCorrect);
-if (!itsCorrect) {
-    return response.status(400).json({ error: "Contraseña incorrecta" });
-
-const userForToken = {
-    id: userExist.id,
-};
-const token = jwt.sign(userForToken, process.env.ACCSESS_TOKEN_SECRET, { 
-    expiresIn: "1d" 
 });
 
-response.cookie("accessToken", token, {
-    expiresiN: "1d", 
-    secure: process.env.NODE_ENV === "production",
-    httpOnly: true,
-});
-
-  return response.sendStatus(200);
-
-};
-
-
-module.exports = loginRouter;
+module.exports = loginRouter; // Exporta el enrutador para que pueda ser importado y usado por la aplicación principal (app.js / index.js).
