@@ -2,7 +2,7 @@
   "name": "to-do-app",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
+ "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=dev nodemon index.js"
   },
@@ -34,6 +34,7 @@
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
-    "cross-env": "^10.1.0"
+    "cross-env": "^10.1.0",
+    "nodemon": "^3.1.14"
   }
 }
