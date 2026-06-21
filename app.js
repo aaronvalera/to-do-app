@@ -28,16 +28,11 @@ app.use("/components", express.static(path.resolve("views", "components")));
 app.use("/images", express.static(path.resolve("media")));
 app.use("/login", express.static(path.resolve("views", "login")));
 app.use("/signup", express.static(path.resolve("views", "signup")));
-app.use("/verify/:token", express.static(path.resolve("views", "verify")));
+app.use("/verify/:id/:token", express.static(path.resolve("views", "verify")));
 
 app.use(morgan("tiny"));
 
 // BACKEND ROUTES
 app.use("/api/users", usersRouter);
-
-app.listen(process.env.MONGO_URI_TEST, () => {
-    console.log("Server is listening the port 3000.");
-}
-);
 
 module.exports = app;
