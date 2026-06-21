@@ -1,7 +1,7 @@
 const loginRouter = require("express").Router(); //importa y ejecuta el método Router de Express para crear un módulo de rutas aislado para el login.
 const bcrypt = require("bcrypt"); //importa la librería Bcrypt para realizar la comparación segura de contraseñas mediante hashing.
 const jwt = require("jsonwebtoken"); //importa la librería JsonWebToken para generar tokens de acceso firmados digitalmente.
-// const user = require("..."); // (Pendiente) Importará el modelo de datos de Mongoose para interactuar con la colección de usuarios en MongoDB.
+const User = require("../models/user"); // (Pendiente) Importará el modelo de datos de Mongoose para interactuar con la colección de usuarios en MongoDB.
 
 loginRouter.post("/", async (req, res) => {
   //se define una ruta HTTP POST en la raíz del módulo. Usa 'async' porque adentro ejecutará tareas asíncronas (promesas).
