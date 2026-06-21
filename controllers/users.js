@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const axios = require("axios");
 const nodemailer = require("nodemailer");
 const { PAGE_URL } = require("../config.js");
+const sendVerificationEmail = require("../utils/sendVerificationEmail.js");
 
 usersRouter.post("/", async (req, res) => {
   try {
@@ -38,32 +39,8 @@ usersRouter.post("/", async (req, res) => {
       passwordHash,
     });
     const savedUser = await newUser.save();
-    const token = jwt.sign(
-      { id: savedUser.id },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "1d" },
-    );
-    // SEND EMAIL
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false, // use STARTTLS (upgrade connection to TLS after connecting)
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-    await transporter.sendMail({
-      from: `"TodoApp" ${process.env.EMAIL_USER}`, // sender address
-      to: savedUser.email, // list of recipients
-      subject: "TodoApp Verification", // subject line
-      html: `
-                <h2>Welcome to ToDoApp!</h2>
-                <p>Please click the link below to verify your email address:</p>
-                <a href='${PAGE_URL}/verify/${token}'>Verify email</a>
-            `, // HTML body
-    });
-    return res.status(201).json("User registered. Please verify your email.");
+    await sendVerificationEmail(savedUser.id, savedUser.email);
+    return res.status(201).json("Please verify your email.");
   } catch (error) {
     console.error("Backend Error Global:", error);
     // Si el error es por duplicado en la base de datos (código 11000 de MongoDB)
@@ -79,4 +56,18 @@ usersRouter.post("/", async (req, res) => {
   }
 });
 
+usersRouter.patch("/:id/:token", async (req, res) => {
+    try {
+        const token = req.params.token;
+        const verifiedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        const id = verifiedToken.id;
+        await User.findByIdAndUpdate(id, {verified: true});
+        return res.sendStatus(200);
+    } catch (error) {
+        const userId = req.params.id;
+        const { email } = await User.findById(userId);
+        await sendVerificationEmail(userId, email);
+        return res.status(400).json({error: "The link has expired. A new verification link has been sent."});
+    }
+});
 module.exports = usersRouter;
