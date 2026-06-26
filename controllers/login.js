@@ -18,7 +18,7 @@ loginRouter.post("/", async (req, res) => {
       // si la propiedad 'verified' del usuario es falsa (el usuario no ha verificado su cuenta).
       return res.status(400).json({ error: "Email not verified." });
     }
-const itsCorrect = await bcrypt.compare(password, userExist.passwordHash); // cambia .password por .passwordHash para que coincida exactamente con tu base de datos.
+    const itsCorrect = await bcrypt.compare(password, userExist.passwordHash); // cambia .password por .passwordHash para que coincida exactamente con tu base de datos.
     if (!itsCorrect) {
       // si las passwords no coinciden
       return res.status(400).json({ error: "Incorrect password." });
