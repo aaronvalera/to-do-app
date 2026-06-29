@@ -1,12 +1,11 @@
 const loginRouter = require("express").Router(); //importa y ejecuta el método Router de Express para crear un módulo de rutas aislado para el login.
 const bcrypt = require("bcrypt"); //importa la librería Bcrypt para realizar la comparación segura de contraseñas mediante hashing.
 const jwt = require("jsonwebtoken"); //importa la librería JsonWebToken para generar tokens de acceso firmados digitalmente.
-const User = require("../models/user"); // (Pendiente) Importará el modelo de datos de Mongoose para interactuar con la colección de usuarios en MongoDB.
+const User = require("../models/user.js"); // (Pendiente) Importará el modelo de datos de Mongoose para interactuar con la colección de usuarios en MongoDB.
 
 loginRouter.post("/", async (req, res) => {
   //se define una ruta HTTP POST en la raíz del módulo. Usa 'async' porque adentro ejecutará tareas asíncronas (promesas).
   const { email, password } = req.body; //desestructura el cuerpo de la petición (req.body) para extraer directamente el correo y la contraseña enviados por el cliente.
-  console.log(email, password); // muestra en la consola del servidor el correo y la contraseña recibidos para que el desarrollador pueda verificar que los datos llegaron correctamente.
   try {
     // intentamos ejecutar el flujo normal del login. si alguna línea aquí adentro falla, el código no rompe el servidor, sino que salta directo al catch
     const userExist = await User.findOne({ email }); // busca de forma asíncrona en la base de datos un único usuario que coincida con el email recibido.
@@ -23,7 +22,6 @@ loginRouter.post("/", async (req, res) => {
       // si las passwords no coinciden
       return res.status(400).json({ error: "Incorrect password." });
     }
-    console.log("Password is correct.", itsCorrect); // muestra en la consola del servidor un mensaje de éxito junto con los datos del usuario que acaba de iniciar sesión.
     const userForToken = {
       // crea el objeto con los datos del usuario (en este caso el ID) que queremos meter dentro del token.
       id: userExist.id, //guardamos el ID único porque es el dato que usará el servidorpara identificar quién es este usuario.
