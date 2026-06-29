@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const {PAGE_URL} = require("../config.js");
+const { PAGE_URL } = require("../config.js");
 
 const sendVerificationEmail = async (id, email) => {
     // Sign token using JSONWebToken

@@ -1,4 +1,4 @@
-import {displayNotification} from '/components/notification.js';
+import { displayNotification } from '/components/notification.js';
 
 // REGEX
 const USERNAME_REGEX = /^[a-zA-Z][a-zA-Z0-9]{4,19}$/;
