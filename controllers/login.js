@@ -33,7 +33,7 @@ loginRouter.post("/", async (req, res) => {
     res.cookie("accessToken", token, { // guarda el token generado dentro de una cookie en el navegador del cliente.
       maxAge: 24 * 60 * 60 * 1000, // define la duración de la cookie (1 día).
       secure: process.env.NODE_ENV === "production", // si está en producción, la cookie solo se transmite mediante conexiones seguras HTTPS.
-      httpOnly: true, // pprotege la cookie prohibiendo que sea accesible mediante scripts de JavaScript en el frontend (evita ataques XSS).
+      httpOnly: true // pprotege la cookie prohibiendo que sea accesible mediante scripts de JavaScript en el frontend (evita ataques XSS).
     });
     return res.sendStatus(200); // responde exitosamente con un estado 200, notificando al frontend que el login fue correcto.
   } catch (error) {
