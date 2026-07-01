@@ -3,7 +3,6 @@ const passwordInput = document.querySelector("#password"); // busca en el html e
 const form = document.querySelector("#form"); // selecciona el formulario completo desde el html para poder controlar cuándo se envía.
 const errorText = document.querySelector("#error-text"); // busca el espacio o la etiqueta de texto en el html donde mostraremos los mensajes de error si algo sale mal.
 
-console.log(axios); // muestra en la consola del navegador la librería axios para que el desarrollador pueda ver que está cargada y lista para usar.
 form.addEventListener("submit", async (event) => {
   // activa un escuchador para que en el momento en que el usuario le dé al botón de enviar (submit), se ejecute esta función asíncrona.
   event.preventDefault(); // evita que la página se recargue
@@ -14,9 +13,7 @@ form.addEventListener("submit", async (event) => {
       email: emailInput.value, // toma el texto exacto que se escribió en el campo de correo.
       password: passwordInput.value, // toma el texto exacto que se escribió en el campo de la contraseña.
     };
-    console.log(user); // muestra en la consola del navegador el objeto 'user' para que el desarrollador pueda ver qué datos se van a enviar al servidor.
     const response = await axios.post("/api/login", user); // usa la librería axios para enviar los datos del objeto 'user' de forma asíncrona al servidor mediante un método post, y espera a que el servidor responda.
-    console.log(response); // muestra en la consola del navegador la respuesta completa que el servidor devolvió para que el desarrollador pueda ver qué pasó.
     window.location.pathname = `/todos/`; // si el servidor responde que todo está bien, esta línea redirecciona automáticamente al usuario a la pantalla de sus tareas o la página principal.
   } catch (error) {
     // si el servidor devuelve un error (por ejemplo, contraseña incorrecta), el código salta directamente a este bloque de seguridad.
