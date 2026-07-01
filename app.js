@@ -10,11 +10,12 @@ const loginRouter = require("./controllers/login.js");
 const todosRouter = require("./controllers/todos.js");
 const logoutRouter = require("./controllers/logout.js");
 const { userExtractor } = require("./middleware/auth.js");
+const { MONGO_URI } = require("./config.js");
 const app = express();
 
 (async() => {
     try {
-      await mongoose.connect(process.env.MONGO_URI_TEST);
+      await mongoose.connect(MONGO_URI);
       console.log("Connected to MongoDB.");
     } catch (error) {
         console.log(error);
@@ -27,7 +28,7 @@ app.use(express.json());
 
 // FRONTEND ROUTES
 app.use("/", express.static(path.resolve("views", "home")));
-app.use('/src', express.static(path.resolve(__dirname, 'src')));
+app.use("/public", express.static(path.resolve("dist")));
 app.use("/components", express.static(path.resolve("views", "components")));
 app.use("/images", express.static(path.resolve("media")));
 app.use("/login", express.static(path.resolve("views", "login")));
