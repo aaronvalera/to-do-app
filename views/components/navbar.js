@@ -1,4 +1,4 @@
-// SELECTORS
+// NAVBAR DIV SELECTOR
 const navbar = document.getElementById("navbar");
 
 // NAVBAR COMPONENT
@@ -33,6 +33,13 @@ const createNavBarHome = () => {
         <a href="/" class="w-24 text-center py-2 px-4 rounded-3xl font-bold bg-blue-400 hover:bg-blue-500 transition ease-in-out duration-300">Home</a>
         <a href="/signup/" class="w-24 py-2 px-4 rounded-3xl font-bold text-center bg-blue-500 hover:bg-blue-600 transition ease-in-out duration-300">Sign Up</a>
     `;
+    } else if(path.includes("todos")) {
+        desktopBtns = `
+            <button id="logout-btn" class="w-24 text-center py-2 px-4 rounded-3xl font-bold bg-blue-400 hover:bg-blue-500 transition ease-in-out duration-300">Log Out</button>
+    `;
+        mobileBtns = `
+            <button id="logout-btn" class="w-24 text-center py-2 px-4 rounded-3xl font-bold bg-blue-400 hover:bg-blue-500 transition ease-in-out duration-300">Log Out</button>
+    `;    
     }
     navbar.innerHTML = `
     <div class="relative flex justify-between items-center h-16 px-4 mx-auto max-w-7xl">
@@ -57,6 +64,7 @@ createNavBarHome();
 // SELECTORS
 const navbarListBtn = document.getElementById("mobile-menu-btn");
 const mobileMenu = document.getElementById("mobile-menu");
+const logoutBtn = document.querySelectorAll("#logout-btn");
 
 // FUNCTIONS
 const openMenu = () => {
@@ -90,3 +98,13 @@ document.addEventListener("click", event => {
         closeMenu();
     }
 });
+
+// Log out function
+logoutBtn.forEach(button => button.addEventListener("click", async event => {
+    try {
+        await axios.get("/api/logout");
+        window.location.pathname = "/login";
+    } catch (error) {
+        console.log(error);
+    }
+}));
