@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const usersRouter = require("./controllers/users.js");
 const loginRouter = require("./controllers/login.js");
 const todosRouter = require("./controllers/todos.js");
+const logoutRouter = require("./controllers/logout.js");
 const { userExtractor } = require("./middleware/auth.js");
 const app = express();
 
@@ -40,5 +41,6 @@ app.use(morgan("tiny"));
 app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/todos", userExtractor, todosRouter);
+app.use("/api/logout", logoutRouter);
 
 module.exports = app;
