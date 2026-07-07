@@ -3,7 +3,6 @@ const User = require("../models/user.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const axios = require("axios");
-const nodemailer = require("nodemailer");
 const sendVerificationEmail = require("../utils/sendVerificationEmail.js");
 
 usersRouter.post("/", async (req, res) => {
