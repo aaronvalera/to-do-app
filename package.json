@@ -22,6 +22,7 @@
   "homepage": "https://github.com/aaronvalera/to-do-app#readme",
   "description": "Full-stack project to put in practice our knowledge. This is a Todo-app with the goal to help users to make the most of their day.",
   "dependencies": {
+    "@sendgrid/mail": "^8.1.6",
     "@tailwindcss/cli": "^4.3.0",
     "axios": "^1.18.0",
     "bcrypt": "^6.0.0",
@@ -33,7 +34,6 @@
     "mongodb": "^7.3.0",
     "mongoose": "^9.6.3",
     "morgan": "^1.11.0",
-    "nodemailer": "^9.0.0",
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {

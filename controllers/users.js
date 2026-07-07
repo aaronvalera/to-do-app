@@ -9,7 +9,6 @@ const sendVerificationEmail = require("../utils/sendVerificationEmail.js");
 usersRouter.post("/", async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    console.log(username, email, password);
 
     if (!username || !email || !password) {
       return res.status(400).json({ error: "All fields are required." });
@@ -36,8 +35,15 @@ usersRouter.post("/", async (req, res) => {
       passwordHash
     });
     const savedUser = await newUser.save();
-    await sendVerificationEmail(savedUser.id, savedUser.email);
-    return res.status(201).json("Please verify your email.");
+    try {
+      await sendVerificationEmail(savedUser.id, savedUser.email);
+    } catch (emailError) {
+      console.error("Critical error sending the verification email:", emailError.message);
+      await User.findByIdAndDelete(savedUser.id);
+      return res.status(500).json({ error: "User could not be registered because the verification email service failed." });
+      
+    }
+    return res.status(201).json({ message: "Please check your email's Spam to verify your account." });
   } catch (error) {
     console.error("Backend Error Global:", error);
     // Si el error es por duplicado en la base de datos (código 11000 de MongoDB)

@@ -109,7 +109,7 @@ form.addEventListener("submit", async event => {
         password: passwordInput.value,
         }
     const { data } = await axios.post("/api/users", newUser);
-    displayNotification(false, data);
+    displayNotification(false, data.message);
     setTimeout(() => {
             notification.innerHTML = "";
             notification.classList.remove("opacity-100", "translate-x-0");
