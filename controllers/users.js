@@ -59,7 +59,10 @@ usersRouter.patch("/:id/:token", async (req, res) => {
         const token = req.params.token;
         const verifiedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         const id = verifiedToken.id;
-        await User.findByIdAndUpdate(id, { verified: true });
+        const user = await User.findByIdAndUpdate(id, { verified: true });
+        if (user.verified) {
+          return res.status(400).json({ error: "This account has already been verified." });
+        }
         return res.sendStatus(200);
     } catch (error) {
         const userId = req.params.id;
