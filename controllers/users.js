@@ -16,16 +16,6 @@ usersRouter.post("/", async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ error: "Email is already registered." });
     }
-    try {
-      const hunterUrl = `https://api.hunter.io/v2/email-verifier?email=${email}&api_key=${process.env.HUNTER_API_KEY}`;
-      const hunterResponse = await axios.get(hunterUrl);
-      const result = hunterResponse.data.data.result;
-      if (result === "undeliverable") {
-        return res.status(400).json({ error: "This email address does not exist or cannot be verified." });
-      }
-    } catch (hunterError) {
-      console.error("Hunter API Error:", hunterError.message);
-    }
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
     const newUser = new User({ 
@@ -36,20 +26,29 @@ usersRouter.post("/", async (req, res) => {
     const savedUser = await newUser.save();
     try {
       await sendVerificationEmail(savedUser.id, savedUser.email);
+      return res.status(201).json({ message: "Please check your email's Spam to verify your account." });
     } catch (emailError) {
-      console.error("Critical error sending the verification email:", emailError.message);
-      await User.findByIdAndDelete(savedUser.id);
-      return res.status(500).json({ error: "User could not be registered because the verification email service failed." });
-      
+      try {
+        const hunterUrl = `https://api.hunter.io/v2/email-verifier?email=${email}&api_key=${process.env.HUNTER_API_KEY}`;
+        const hunterResponse = await axios.get(hunterUrl);
+        const result = hunterResponse.data.data.result;
+        if (result === "undeliverable") {
+          await User.findByIdAndDelete(savedUser.id);
+          return res.status(400).json({ error: "This email address does not exist or cannot be verified." });
+        }
+        await User.findByIdAndUpdate(savedUser.id, { verified: true });
+        return res.status(201).json({ message: "Registration successful! You can now log in directly." });
+      } catch (hunterError) {
+        console.error("Critical: Both SendGrid and Hunter failed:", hunterError.message);
+        await User.findByIdAndUpdate(savedUser.id, { verified: true });
+        return res.status(201).json({ message: "Registration successful! You can now log in directly." });
+      }
     }
-    return res.status(201).json({ message: "Please check your email's Spam to verify your account." });
   } catch (error) {
     console.error("Backend Error Global:", error);
-    // Si el error es por duplicado en la base de datos (código 11000 de MongoDB)
-    if (error.code === 11000) {
+    if (error.code === 11000) { // Si el error es por duplicado en la base de datos (código 11000 de MongoDB)
       return res.status(400).json({ error: "Username or email already exists." });
     }
-    // Cualquier otro error del servidor se envía limpiamente como JSON
     return res.status(500).json({ error: "An unexpected error occurred on the server." });
   }
 });
