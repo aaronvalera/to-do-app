@@ -102,6 +102,7 @@ passwordMatchInput.addEventListener("input", event => {
 
 form.addEventListener("submit", async event => {
     event.preventDefault();
+    submitFormBtn.disabled = true;
     try {
         const newUser = {
         username: usernameInput.value,
@@ -115,11 +116,11 @@ form.addEventListener("submit", async event => {
             notification.classList.remove("opacity-100", "translate-x-0");
             notification.classList.add("opacity-0", "translate-x-5", "pointer-events-none");
         }, 4000);
-        usernameInput.value = "";
-        emailInput.value = "";
-        passwordInput.value = "";
-        passwordMatchInput.value = "";
+        event.target.reset();
         [usernameInput, emailInput, passwordInput, passwordMatchInput].forEach(clearInput);
+        setTimeout(() => {
+            window.location.pathname = "/login";
+        }, 3000);
         } catch (error) {
             displayNotification(true, error.response.data.error);
             setTimeout(() => {
