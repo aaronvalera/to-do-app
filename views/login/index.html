@@ -1,70 +1,49 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/public/output.css" />
-    <link rel="icon" type="image/png" href="/images/tasks_ok_apply_1843.png" />
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/public/output.css"/>
+    <link rel="icon" type="image/png" href="/images/tasks_ok_apply_1843.png"/>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>TodoApp - Sign In</title>
   </head>
   <body class="bg-zinc-50 min-h-screen flex flex-col">
-    <!-- contenedor donde el archivo js de aaron va a meter el navbar -->
-    <div
-      id="navbar"
-      class="fixed top-0 right-0 left-0 h-16 px-4 border border-gray-300 bg-white shadow-md"
-    ></div>
-
-    <!-- contenedor principal que centra todo en la pantalla -->
-    <div
-      class="pt-16 pb-10 px-4 sm:px-8 min-h-screen flex flex-col md:flex-row max-w-7xl mx-auto justify-center items-center gap-10"
-    >
-      <!-- contenedor de la imagen izquierda solo para pantallas grandes -->
+    <div id="navbar" class="fixed top-0 right-0 left-0 h-16 px-4 border border-gray-300 bg-white shadow-md"></div>
+    <div class="pt-16 pb-10 px-4 sm:px-8 min-h-screen flex flex-col md:flex-row max-w-7xl mx-auto justify-center items-center gap-10">
       <div class="hidden md:flex max-w-xs w-3/4 justify-center items-center">
-        <img class="w-full" src="/images/login-icon.png" alt="login-icon" />
+        <img class="w-full" src="/images/login-icon.png" alt="login-icon"/>
       </div>
-      <!-- formulario de login -->
-      <form
-        id="form"
-        class="flex flex-col gap-4 bg-white p-8 rounded-lg shadow-md w-full max-w-md"
-      >
+      <form id="form" class="flex flex-col gap-4 bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 class="text-2xl font-bold text-center text-zinc-800">Sign In</h2>
-        <!-- contenedor del input de correo -->
         <div class="flex flex-col gap-2">
-          <label class="text-sm font-semibold text-zinc-600"
-            >Email Address</label
-          >
-          <input
-            type="email"
-            id="email"
-            required
-            class="border border-zinc-300 p-2 rounded-lg focus:outline-none focus:border-indigo-500"
-            placeholder="your@email.com"
-          />
+          <label class="text-sm font-semibold text-zinc-600">Email Address</label>
+          <input type="email" id="email" required class="border border-zinc-300 p-2 rounded-lg focus:outline-none focus:border-blue-500" placeholder="your@email.com"/>
         </div>
-        <!-- contenedor del input de contraseña -->
         <div class="flex flex-col gap-2">
           <label class="text-sm font-semibold text-zinc-600">Password</label>
-          <input
-            type="password"
-            id="password"
-            required
-            class="border border-zinc-300 p-2 rounded-lg focus:outline-none focus:border-indigo-500"
-            placeholder="••••••••"
-          />
+          <div class="password-wrapper group relative w-full">
+            <input type="password" id="password" required class="border border-zinc-300 p-2 pr-10 rounded-lg focus:outline-none focus:border-blue-500 w-full" placeholder="••••••••"/>
+            <span class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-zinc-400 hover:text-zinc-600" data-target="password">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye block group-[.is-visible]:hidden" viewBox="0 0 16 16">
+  							<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+  							<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+							</svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash hidden group-[.is-visible]:block" viewBox="0 0 16 16">
+  							<path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7 7 0 0 0-2.79.588l.77.771A6 6 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755q-.247.248-.517.486z"/>
+  							<path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829"/>
+  							<path d="M3.35 5.47q-.27.24-.518.487A13 13 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7 7 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12z"/>
+							</svg>
+						</span>
+					</div>
           <p id="error-text" class="text-sm text-red-600"></p>
         </div>
-        <!-- boton para iniciar sesion -->
-        <button
-          id="form-btn"
-          class="bg-indigo-700 py-2 px-4 rounded-lg font-bold text-white hover:bg-indigo-800 transition-colors mt-2"
-        >
-          Login
-        </button>
+        <button id="form-btn" class="bg-indigo-700 py-2 px-4 rounded-lg font-bold text-white hover:bg-indigo-800 transition-colors mt-2">Login</button>
       </form>
     </div>
     <script src="index.js"></script>
+    <script src="/helpers/togglePasswords.js"></script>
     <script src="/components/navbar.js"></script>
     <script src="/components/footer.js"></script>
   </body>

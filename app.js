@@ -29,6 +29,7 @@ app.use(express.json());
 // FRONTEND ROUTES
 app.use("/", express.static(path.resolve("views", "home")));
 app.use("/public", express.static(path.resolve("dist")));
+app.use("/helpers", express.static(path.resolve("views", "helpers")));
 app.use("/components", express.static(path.resolve("views", "components")));
 app.use("/images", express.static(path.resolve("media")));
 app.use("/login", express.static(path.resolve("views", "login")));
